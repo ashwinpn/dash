@@ -1,4 +1,8 @@
-version: 2
+version: 2.1
+
+orbs:
+  win: circleci/windows@2.2.0
+
 jobs:
   percy-finalize:
     docker:
@@ -184,11 +188,8 @@ jobs:
             PYVERSION: python27
 
   build-windows-37:
-    version: 2
+    executor: win/default
     shell: bash.exe
-    machine:
-      image: windows-default
-    resource_class: windows.medium
     steps:
       - checkout
       - run: echo $PYVERSION > ver.txt
