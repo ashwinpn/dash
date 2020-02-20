@@ -183,6 +183,15 @@ jobs:
           environment:
             PYVERSION: python27
 
+  build-windows-37:
+    <<: *build-core
+    version: 2
+    shell: bash.exe
+    machine:
+      image: windows-default
+    resource_class: windows.medium
+
+
   test-37: &test
     working_directory: ~/dash
     docker:
