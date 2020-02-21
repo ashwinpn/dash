@@ -200,7 +200,7 @@ jobs:
       - run:
           name: ️️🏗️ pip dev requirements
           command: |
-            sudo pip install --upgrade virtualenv
+            pip install --upgrade virtualenv
             python -m venv venv || virtualenv venv && . venv/bin/activate
             sed -i '/dash-/d' requires-install.txt
             pip install -e . --no-cache-dir -r requires-install.txt -r requires-dev.txt -r requires-testing.txt --progress-bar off
