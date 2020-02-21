@@ -186,7 +186,9 @@ jobs:
             PYVERSION: python27
 
   build-windows-37:
-    executor: win/default
+    executor:
+      name: win/default
+      shell: bash.exe
     steps:
       - checkout
       - run: echo 'Hello'
