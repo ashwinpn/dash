@@ -186,12 +186,10 @@ jobs:
             PYVERSION: python27
 
   build-windows-37:
+    <<: *build-core
     executor:
       name: win/default
       shell: bash.exe
-    steps:
-      - checkout
-      - run: echo 'Hello'
 
 
   test-37: &test
