@@ -207,7 +207,7 @@ jobs:
             virtualenv venv
             ls venv
             ls venv/bin
-            source venv/bin/activate
+            venv/Scripts/activate.bat
             sed -i '/dash-/d' requires-install.txt
             pip install -e . --no-cache-dir -r requires-install.txt -r requires-dev.txt -r requires-testing.txt --progress-bar off
       - save_cache:
