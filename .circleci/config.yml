@@ -204,7 +204,7 @@ jobs:
           command: |
             pip install --upgrade virtualenv
             virtualenv venv
-            venv/Scripts/activate.bat
+            source venv/Scripts/activate
             sed -i '/dash-/d' requires-install.txt
             pip install -e . --no-cache-dir -r requires-install.txt -r requires-dev.txt -r requires-testing.txt --progress-bar off
       - save_cache:
@@ -214,7 +214,7 @@ jobs:
       - run:
           name: ️️🏗️ build core
           command: |
-              venv/Scripts/activate.bat && pip install --no-cache-dir --upgrade -e . --progress-bar off && mkdir packages
+              source venv/Scripts/activate && pip install --no-cache-dir --upgrade -e . --progress-bar off && mkdir packages
               cd dash-renderer && renderer build && python setup.py sdist && mv dist/* ../packages/ && cd ..
               git clone --depth 1 https://github.com/plotly/dash-core-components.git
               cd dash-core-components && npm ci && npm run build && python setup.py sdist && mv dist/* ../packages/  && cd ..
