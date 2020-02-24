@@ -196,13 +196,16 @@ jobs:
       - checkout
       - run: echo $PYVERSION > ver.txt
       - run: which python
+      - run: python --version
       - restore_cache:
           key: dep-{{ checksum ".circleci/config.yml" }}-{{ checksum "ver.txt" }}-{{ checksum "requires-dev.txt" }}-{{ checksum "requires-install.txt" }}-{{ checksum "requires-testing.txt" }}
       - run:
           name: ️️🏗️ pip dev requirements
           command: |
             pip install --upgrade virtualenv
-            python -m venv venv
+            pip freeze
+            python3 -m venv venv
+            source venv/bin/activate
             sed -i '/dash-/d' requires-install.txt
             pip install -e . --no-cache-dir -r requires-install.txt -r requires-dev.txt -r requires-testing.txt --progress-bar off
       - save_cache:
