@@ -209,20 +209,20 @@ jobs:
           key: dep-{{ checksum ".circleci/config.yml" }}-{{ checksum "ver.txt" }}-{{ checksum "requires-dev.txt" }}-{{ checksum "requires-install.txt" }}-{{ checksum "requires-testing.txt" }}
           paths:
               - venv
-      - run:
-          name: ️️🏗️ build core
-          command: |
-              . venv/bin/activate && pip install --no-cache-dir --upgrade -e . --progress-bar off && mkdir packages
-              cd dash-renderer && renderer build && python setup.py sdist && mv dist/* ../packages/ && cd ..
-              git clone --depth 1 https://github.com/plotly/dash-core-components.git
-              cd dash-core-components && npm ci && npm run build && python setup.py sdist && mv dist/* ../packages/  && cd ..
-              git clone --depth 1 https://github.com/plotly/dash-renderer-test-components
-              cd dash-renderer-test-components && npm ci && npm run build:all && python setup.py sdist && mv dist/* ../packages/ && cd ..
-              ls -la packages
-      - persist_to_workspace:
-          root: ~/dash
-          paths:
-            - packages/*.tar.gz
+      # - run:
+      #     name: ️️🏗️ build core
+      #     command: |
+      #         . venv/bin/activate && pip install --no-cache-dir --upgrade -e . --progress-bar off && mkdir packages
+      #         cd dash-renderer && renderer build && python setup.py sdist && mv dist/* ../packages/ && cd ..
+      #         git clone --depth 1 https://github.com/plotly/dash-core-components.git
+      #         cd dash-core-components && npm ci && npm run build && python setup.py sdist && mv dist/* ../packages/  && cd ..
+      #         git clone --depth 1 https://github.com/plotly/dash-renderer-test-components
+      #         cd dash-renderer-test-components && npm ci && npm run build:all && python setup.py sdist && mv dist/* ../packages/ && cd ..
+      #         ls -la packages
+      # - persist_to_workspace:
+      #     root: ~/dash
+      #     paths:
+      #       - packages/*.tar.gz
 
   test-37: &test
     working_directory: ~/dash
