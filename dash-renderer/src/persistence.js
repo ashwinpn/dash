@@ -3,8 +3,9 @@
  *
  * When users input new prop values, they can be stored and reapplied later,
  * when the component is recreated (changing `Tab` for example) or when the
- * page is reloaded (depending on `persistence_type`) Storage is tied to
- * component ID and will not on with components without an ID.
+ * page is reloaded (depending on `persistence_type`). Storage is tied to
+ * component ID, and the prop values will not be stored with components
+ * without an ID.
  *
  * Renderer handles the mechanics, but components must define a few props:
  *
@@ -68,19 +69,14 @@ import {
 import {createAction} from 'redux-actions';
 
 import Registry from './registry';
+import {stringifyId} from './actions/dependencies';
 
 export const storePrefix = '_dash_persistence.';
 
 function err(e) {
     const error = typeof e === 'string' ? new Error(e) : e;
 
-    /* eslint-disable no-console */
-    // Send this to the console too, so it's still available with debug off
-    console.error(e);
-    /* eslint-disable no-console */
-
     return createAction('ON_ERROR')({
-        myID: storePrefix,
         type: 'frontEnd',
         error,
     });
@@ -275,7 +271,7 @@ const getTransform = (element, propName, propPart) =>
         : noopTransform;
 
 const getValsKey = (id, persistedProp, persistence) =>
-    `${id}.${persistedProp}.${JSON.stringify(persistence)}`;
+    `${stringifyId(id)}.${persistedProp}.${JSON.stringify(persistence)}`;
 
 const getProps = layout => {
     const {props, type, namespace} = layout;
@@ -318,7 +314,7 @@ export function recordUiEdit(layout, newProps, dispatch) {
 
     forEach(persistedProp => {
         const [propName, propPart] = persistedProp.split('.');
-        if (newProps[propName]) {
+        if (newProps[propName] !== undefined) {
             const storage = getStore(persistence_type, dispatch);
             const {extract} = getTransform(element, propName, propPart);
 

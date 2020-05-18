@@ -19,6 +19,8 @@ $ cd dash-renderer
 $ npm run build  # or `renderer build`
 # install dash-renderer for development
 $ pip install -e .
+# build and install components used in tests
+$ npm run setup-tests
 # you should see both dash and dash-renderer are pointed to local source repos
 $ pip list | grep dash
 ```
@@ -112,20 +114,20 @@ Note: *You might find out that we have more integration tests than unit tests in
 
 ### Integration Tests
 
-We introduced the `dash.testing` feature in [Dash 1.0](https://community.plot.ly/t/announcing-dash-testing/24868). It makes writing a Dash integration test much easier. Please read the [tutorial](http://dash.plot.ly/testing) and add relevant integration tests with any new features or bug fixes.
+We introduced the `dash.testing` feature in [Dash 1.0](https://community.plotly.com/t/announcing-dash-testing/24868). It makes writing a Dash integration test much easier. Please read the [tutorial](http://dash.plotly.com/testing) and add relevant integration tests with any new features or bug fixes.
 
 ## Financial Contributions
 
 Dash, and many of Plotly's open source products, have been funded through direct sponsorship by companies. [Get in touch] about funding feature additions, consulting, or custom app development.
 
-[Dash Core Components]: https://dash.plot.ly/dash-core-components
+[Dash Core Components]: https://dash.plotly.com/dash-core-components
 [Dash HTML Components]: https://github.com/plotly/dash-html-components
-[write your own components]: https://dash.plot.ly/plugins
+[write your own components]: https://dash.plotly.com/plugins
 [Dash Component Boilerplate]: https://github.com/plotly/dash-component-boilerplate
 [issues]: https://github.com/plotly/dash-core-components/issues
 [GitHub flow]: https://guides.github.com/introduction/flow/
 [semantic versioning]: https://semver.org/
-[Dash Community Forum]: https://community.plot.ly/c/dash
-[Get in touch]: https://plot.ly/products/consulting-and-oem
+[Dash Community Forum]: https://community.plotly.com/c/dash
+[Get in touch]: https://plotly.com/products/consulting-and-oem
 [Documentation]: https://github.com/orgs/plotly/projects/8
 [Dash Docs]: https://github.com/plotly/dash-docs
